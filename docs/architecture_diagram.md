@@ -1,0 +1,13 @@
+flowchart TD
+    A[Olist CSV Dataset] --> B[Python CSV Ingestion]
+    B --> C[PostgreSQL Raw Schema]
+    C --> D[Typed Staging Schema]
+    D --> E[Data Quality Checks]
+    E --> F[Audit Logs and Reject Records]
+    D --> G[Warehouse Star Schema]
+    G --> H[Incremental ETL]
+    G --> I[Hybrid Join Enrichment]
+    G --> J[SCD Type 2 Product History]
+    G --> K[Partitioning and Indexing]
+    K --> L[Mart Analytical Views]
+    L --> M[Power BI Dashboard]

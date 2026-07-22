@@ -1,0 +1,14 @@
+venv/
+.env
+__pycache__/
+*.pyc
+
+logs/
+data/raw/
+data/processed/
+data/rejected/
+
+*.pbix
+*.zip
+*.backup
+*.bak
