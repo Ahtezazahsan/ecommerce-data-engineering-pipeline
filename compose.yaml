@@ -1,0 +1,55 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: ecommerce-postgres
+
+    environment:
+      POSTGRES_USER: ecommerce_etl_user
+      POSTGRES_PASSWORD: etl_docker_pass
+      POSTGRES_DB: ecommerce_etl_db
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - ecommerce_full_deployment_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ecommerce_etl_user -d ecommerce_etl_db"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+    restart: unless-stopped
+
+
+  etl:
+    build: .
+    image: ecommerce-etl-app:latest
+    container_name: ecommerce-etl
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ecommerce_etl_db
+      DB_USER: ecommerce_etl_user
+      DB_PASSWORD: etl_docker_pass
+
+    volumes:
+      - ./data/raw:/app/data/raw:ro
+
+    restart: "no"
+
+
+volumes:
+  ecommerce_full_deployment_data:
