@@ -19,3 +19,8 @@ logs/
 config/airflow.cfg
 __pycache__/
 *.pyc
+
+
+ecommerce_dbt/target/
+ecommerce_dbt/logs/
+ecommerce_dbt/dbt_packages/

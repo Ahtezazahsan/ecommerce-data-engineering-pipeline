@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: olist_orders_dataset
+
+models:
+  - name: stg_orders
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
