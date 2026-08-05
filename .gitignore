@@ -12,3 +12,10 @@ data/rejected/
 *.zip
 *.backup
 *.bak
+
+
+.env.airflow
+logs/
+config/airflow.cfg
+__pycache__/
+*.pyc
